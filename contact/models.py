@@ -14,11 +14,14 @@ last_name(String),
 phone (String), 
 email (Email), 
 created_at (Date), 
-description (Text)
+description (Text),
+
+
 category (Foreign Key), 
 show (Boolean), 
+picture (image),
+
 owner (Foreign Key), 
-picture (image)
 """
 
 
@@ -29,6 +32,8 @@ class Contact(models.Model):
     email = models.EmailField(max_length=254)
     created_at = models.DateTimeField(default=timezone.now)
     description = models.TextField(blank=True)
+    show = models.BooleanField(default=True)
+    picture = models.ImageField(blank=True, upload_to="pictures/%Y/%m/%d/")
 
 
 def __str__(self):
