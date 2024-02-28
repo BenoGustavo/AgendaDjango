@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from contact.models import Contact
+from contact.models import Contact, Category
 
 # Register your models here.
 
@@ -35,3 +35,10 @@ class ContactAdmin(admin.ModelAdmin):
     # This will make the id and created_at fields clickable in the admin panel.
     # You can't make the first_name and last_name clickable because they are already editable.
     list_display_links = ("id", "phone")
+
+    @admin.register(Category)
+    class CategoryAdmin(admin.ModelAdmin):
+        # This will display the following fields in the admin panel.
+        list_display = ("name",)
+        # This will order the contacts by id in descending order (it's decending because of the -).
+        ordering = ("-id",)
