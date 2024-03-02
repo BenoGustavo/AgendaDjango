@@ -15,6 +15,7 @@ class ContactAdmin(admin.ModelAdmin):
         "phone",
         "email",
         "created_at",
+        "show",
     )
 
     # This will order the contacts by id in descending order (it's decending because of the -).
@@ -30,7 +31,7 @@ class ContactAdmin(admin.ModelAdmin):
     list_max_show_all = 100
 
     # This will make the first_name and last_name fields editable in the admin panel.
-    list_editable = ("first_name", "last_name")
+    list_editable = ("first_name", "last_name", "show")
 
     # This will make the id and created_at fields clickable in the admin panel.
     # You can't make the first_name and last_name clickable because they are already editable.
