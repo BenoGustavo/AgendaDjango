@@ -20,7 +20,7 @@
                 {% for contact in contacts %}
                     <tr class="table__row">
                         <td class="table__cel">
-                            <a href="#" class="table__link">{{ contact.id }}</a>
+                            <a href="{% url "contact:single_contact" contact.id %}" class="table__link">{{ contact.id }}</a>
                         </td>
                         <td class="table__cel">{{ contact.first_name }}</td>
                         <td class="table__cel">{{ contact.last_name }}</td>
