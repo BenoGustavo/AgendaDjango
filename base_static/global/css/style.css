@@ -1,0 +1,123 @@
+:root {
+    --spacing: 1.5rem;
+    --link-dark-color: rgb(0, 83, 134);
+    --link-light-color: rgb(156, 217, 255);
+    --clr-white: rgb(245, 245, 255);
+    --clr-black: rgb(0, 0, 30);
+    --clr-light-gray: rgb(230, 230, 245);
+    --clr-dark-shadow-5: rgba(0, 0, 10, 5%);
+    --clr-dark-shadow-10: rgba(0, 0, 10, 10%);
+    --clr-dark-shadow-20: rgba(0, 0, 10, 20%);
+    --clr-light-shadow-5: rgba(200, 200, 255, 5%);
+    --clr-light-shadow-10: rgba(200, 200, 255, 10%);
+    --clr-light-shadow-20: rgba(200, 200, 255, 20%);
+    --main-page-width: 120rem;
+    --table-min-width: 60rem;
+    --biggest-font-size: 5rem;
+    --bigger-font-size: 4rem;
+    --big-font-size: 3.2rem;
+    --medium-font-size: 2.4rem;
+    --small-font-size: 1.6rem;
+    --smaller-font-size: 1.4rem;
+    --smallest-font-size: 1.2rem;
+    --transition-fast: 300ms;
+    --transition-medium: 600ms;
+    --transition-slow: 1s;
+    --default-border-radius: 4px;
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+        Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    line-height: 1.5;
+    font-size: var(--small-font-size);
+    color: var(--clr-black);
+    -webkit-font-smoothing: antialiased;
+    background: var(--clr-light-gray);
+}
+
+img,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+
+.main__content {
+    max-width: var(--main-page-width);
+    margin: calc(var(--spacing) * 2) auto;
+    padding: var(--spacing);
+    background: var(--clr-white);
+    box-shadow: 2px 2px 5px var(--clr-dark-shadow-20);
+    border-radius: var(--default-border-radius);
+}
+
+.table__dont__overflow {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.contacts__table {
+    width: 100%;
+    min-width: var(--table-min-width);
+    border-collapse: collapse;
+}
+
+.table__row {
+    text-align: left;
+    text-overflow: ellipsis;
+    transition: background-color var(--transition-fast) ease-in-out;
+}
+
+.table__row:nth-of-type(2n) {
+    background: var(--clr-dark-shadow-5);
+}
+
+.table__row:not(.table-row-header):hover {
+    background: var(--clr-dark-shadow-10);
+}
+
+.table__row__header {
+    background: var(--clr-light-gray);
+    color: var(--clr-black);
+}
+
+.table__cel,
+.table__header {
+    padding: var(--spacing);
+}
+
+.table__link {
+    color: var(--link-dark-color);
+    transition: color var(--transition-fast) ease-in-out;
+    text-decoration: none;
+}
+
+.table__link:hover {
+    color: var(--clr-black);
+}
+
+.table__caption {
+    font-size: var(--medium-font-size);
+    font-weight: bold;
+    padding: var(--spacing);
+}
+
+@media (min-width: 600px) {
+    .single__contact {
+        max-width: 80%;
+        margin: calc(var(--spacing) * 2) auto;
+    }
+}
