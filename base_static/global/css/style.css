@@ -193,3 +193,25 @@ svg {
     border-radius: var(--default-border-radius);
     border: 1px solid var(--link-light-color);
 }
+
+/* pagination css */
+
+.pagination {
+    margin-top: var(--spacing);
+    display: flex;
+    justify-content: center;
+    padding: calc(var(--spacing) * 0.8);
+    font-size: var(--small-font-size);
+}
+
+.pagination .step-links {
+    display: flex;
+    gap: calc(var(--spacing) * 0.8);
+}
+
+.pagination .step-links a {
+    color: var(--link-dark-color);
+    transition: color var(--transition-fast) ease-in-out;
+    text-decoration: none;
+    display: block;
+}

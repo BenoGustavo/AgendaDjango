@@ -1,0 +1,19 @@
+{% if contacts %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if contacts.has_previous %}
+                <a href="?page=1&q={{ request.GET.q.strip }}">&laquo; first</a>
+                <a href="?page={{ contacts.previous_page_number }}&q={{ request.GET.q.strip }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.
+            </span>
+
+            {% if contacts.has_next %}
+                <a href="?page={{ contacts.next_page_number }}&q={{ request.GET.q.strip }}">next</a>
+                <a href="?page={{ contacts.paginator.num_pages }}&q={{ request.GET.q.strip }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+{% endif %}
