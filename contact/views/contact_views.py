@@ -2,19 +2,21 @@ from django.shortcuts import render, get_object_or_404, redirect
 from contact.models import Contact
 from django.db.models import Q
 
-from django.db.models import Value as V
-from django.db.models.functions import Concat
+from contact.views.utils import paginatorWrap
 
 
 def index(request):
     # This will get all the contacts from the database.
     contacts = Contact.objects.filter(show=True).order_by("-id")
 
+    # display 25 contacts per page
+    contacts_on_the_page = paginatorWrap(request, contacts, 25)
+
     table_headers = ["ID", "First name", "Last name", "Phone", "Email"]
 
     # This is the context with all the contacts data will be passed to the template.
     context = {
-        "contacts": contacts,
+        "contacts": contacts_on_the_page,
         "table_headers": table_headers,
         "website_tittle": "Contacts -",
     }
@@ -61,11 +63,14 @@ def search(request):
         .order_by("-id")
     )
 
+    # display 25 contacts per page
+    contacts_on_the_page = paginatorWrap(request, contacts, 25)
+
     table_headers = ["ID", "First name", "Last name", "Phone", "Email"]
 
     # This is the context with all the contacts data will be passed to the template.
     context = {
-        "contacts": contacts,
+        "contacts": contacts_on_the_page,
         "table_headers": table_headers,
         "website_tittle": "Contacts -",
     }
