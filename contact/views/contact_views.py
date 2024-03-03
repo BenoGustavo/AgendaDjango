@@ -1,5 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from contact.models import Contact
+from django.db.models import Q
+
+from django.db.models import Value as V
+from django.db.models.functions import Concat
 
 
 def index(request):
@@ -35,5 +39,39 @@ def single_contact(request, contact_id: int):
     return render(
         request,
         "contact/single_contact.html",
+        context,
+    )
+
+
+def search(request):
+    search_query = request.GET.get("q", "").strip()
+
+    if search_query == "":
+        return redirect("contact:index")
+
+    # This will get all the contacts from the database.
+    contacts = (
+        Contact.objects.filter(show=True)
+        .filter(
+            Q(first_name__icontains=search_query)
+            | Q(last_name__icontains=search_query)
+            | Q(email__icontains=search_query)
+            | Q(phone__icontains=search_query)
+        )
+        .order_by("-id")
+    )
+
+    table_headers = ["ID", "First name", "Last name", "Phone", "Email"]
+
+    # This is the context with all the contacts data will be passed to the template.
+    context = {
+        "contacts": contacts,
+        "table_headers": table_headers,
+        "website_tittle": "Contacts -",
+    }
+
+    return render(
+        request,
+        "contact/index.html",
         context,
     )
