@@ -12,6 +12,7 @@ def index(request):
     context = {
         "contacts": contacts,
         "table_headers": table_headers,
+        "website_tittle": "Contacts -",
     }
 
     return render(
@@ -28,6 +29,7 @@ def single_contact(request, contact_id: int):
     # This is the context with the contact data will be passed to the template.
     context = {
         "contact": contact,
+        "website_tittle": contact.first_name + " " + contact.last_name + " -",
     }
 
     return render(
