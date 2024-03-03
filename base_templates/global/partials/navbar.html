@@ -23,13 +23,15 @@
     </nav>
 
     <div class="search">
-        <form action="" method="get">
+        <form action="{% url "contact:search" %}" method="get">
             <input 
                 type="search" 
                 class="search__input" 
                 placeholder="Search"
                 id="search"
                 name="q"
+                {% comment %} Continue with the searched text on the search bar {% endcomment %}
+                value="{{ request.GET.q.strip }}"
             >
         </form>
     </div>
