@@ -1,6 +1,7 @@
 {% extends "global/base.html" %}
 
 {% block content %}
+{% if contacts %}
     <div class="table__dont__overflow">
         <table class="contacts__table">
             <caption class="table__caption">
@@ -31,4 +32,11 @@
         </table>
     </div>
 
+{% else %}
+    <div class="single__contact">
+        <h1 class="single__contact__name">
+            The contact {{ request.GET.q.strip }} was not found.
+        </h1>
+    </div>
+{% endif %}
 {% endblock content %}
