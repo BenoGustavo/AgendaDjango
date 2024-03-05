@@ -22,6 +22,8 @@ app_name = "contact"
 
 urlpatterns = [
     path("search/", views.search, name="search"),
-    path("<int:contact_id>/", views.single_contact, name="single_contact"),
     path("", views.index, name="index"),
+    # CRUD of the contacts
+    path("contact/<int:contact_id>/", views.single_contact, name="single_contact"),
+    path("contact/create/", views.create, name="create"),
 ]
