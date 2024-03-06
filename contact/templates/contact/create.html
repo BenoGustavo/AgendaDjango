@@ -14,16 +14,29 @@
             {% csrf_token %}
 
             <div class="form__content">
-                <div class="form__group">
-                    <label for="id_first_name">LABEL</label>
-                    <input type="text" name="first_name" maxlength="255" id="id_first_name">
-                </div>
-
-                <div class="form__group">
-                    <label for="id_last_name">LABEL</label>
-                    <input type="text" name="last_name" maxlength="255" id="id_last_name">
-                </div>
+                {% for field in form %}
+                    <div class="form__group">
+                        <label for="{{  field.id_for_label  }}">{{ field.label  }}</label>
+                        {{ field }}
+                        {{ field.errors }}
+                    </div>
+                {% endfor %}
             </div>
+            
+            {% comment %} 
+            this is a non field error, it should be displayed above the form, if it exists
+            {% endcomment %}
+
+            {% if form.non_field_errors %}
+                <div class="form__content">
+                    <div class="form__group">
+                        <div class="message error">
+                            {{ form.non_field_errors }}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}  
+
 
             <div class="form__content">
                 <div class="form__group">
