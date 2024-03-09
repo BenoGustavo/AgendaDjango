@@ -12,20 +12,36 @@ class ContactForm(forms.ModelForm):
             "phone",
             "email",
             "description",
+            "category",
         )
 
         # widgets = {"first_name": forms.PasswordInput()}
 
     def clean(self):
+        # get all the data
         cleaned_data = self.cleaned_data
 
-        print("limpando os dados" + str(cleaned_data))
+        first_name = cleaned_data.get("first_name")
+        last_name = cleaned_data.get("last_name")
 
-        self.add_error(
-            "first_name", ValidationError("This is a test error", code="test1")
-        )
-        self.add_error(
-            "last_name", ValidationError("This is a test error2", code="test2")
-        )
+        if first_name == last_name:
+            error = ValidationError(
+                "Your first name can't be equals to your last name",
+                code="invalid_name",
+            )
+            self.add_error("first_name", error)
+            self.add_error("last_name", error)
 
         return super().clean()
+
+    # This is a custom validation for the first name field and needs to return the value of the field.
+    # def clean_first_name(self):
+    #     first_name = self.cleaned_data["first_name"]
+    #     if first_name == "test":
+    #         error = ValidationError(
+    #             "don't type test as your first name, please.",
+    #             code="invalid_name",
+    #         )
+    #         self.add_error("first_name", error)
+
+    #     return first_name
