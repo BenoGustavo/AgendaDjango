@@ -36,6 +36,8 @@ def single_contact(request, contact_id: int):
     context = {
         "contact": contact,
         "website_tittle": contact.first_name + " " + contact.last_name + " -",
+        "delete__button__text": "Delete",
+        "Form__method": "GET",
     }
 
     return render(

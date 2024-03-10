@@ -79,3 +79,22 @@ def update(request, contact_id: int):
         "contact/create.html",
         context,
     )
+
+
+def delete(request, contact_id: int):
+    contact = get_object_or_404(Contact, pk=contact_id, show=True)
+
+    if request.method == "POST":
+        contact.delete()
+        return redirect("contact:index")
+
+    return render(
+        request,
+        "contact/single_contact.html",
+        {
+            "contact": contact,
+            "delete__button__text": "Are you sure you want to delete this contact?",
+            "website_tittle": "Manage contact -",
+            "form__method": "POST",
+        },
+    )
