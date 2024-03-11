@@ -13,6 +13,12 @@
         <p><b>Description:</b> {{ contact.description }}</p>
         <p><b>Category:</b> {{ contact.category.name }}</p>
 
+        {% comment %} Check if the contact has a picture and display it {% endcomment %}
+        
+        {% if contact.picture %}
+            <p><img src="{{contact.picture.url}}" alt="{{ contact.first_name }} {{contact.last_name}}"></p>
+        {% endif %}
+
         <div class="contact__links">
             <a href={% url "contact:update" contact.id %} class="button button__link">Update</a>
             <form action="{% url "contact:delete" contact.id %}" method="{{form__method}}">

@@ -4,6 +4,14 @@ from . import models
 
 
 class ContactForm(forms.ModelForm):
+    picture = forms.ImageField(
+        widget=forms.FileInput(
+            attrs={
+                "accept": "image/*",
+            }
+        )
+    )
+
     class Meta:
         model = models.Contact
         fields = (
@@ -13,6 +21,7 @@ class ContactForm(forms.ModelForm):
             "email",
             "description",
             "category",
+            "picture",
         )
 
         # widgets = {"first_name": forms.PasswordInput()}

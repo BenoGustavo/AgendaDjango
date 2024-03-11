@@ -9,7 +9,7 @@ def create(request):
 
     # This will be the view for the contact creation form, if the user is only entering the page it won't trigger.
     if request.method == "POST":
-        form = ContactForm(request.POST)
+        form = ContactForm(request.POST, request.FILES)
 
         # This is the context with all the contacts data will be passed to the template.
         context = {
@@ -48,7 +48,7 @@ def update(request, contact_id: int):
 
     # This will be the view for the contact creation form, if the user is only entering the page it won't trigger.
     if request.method == "POST":
-        form = ContactForm(request.POST, instance=contact)
+        form = ContactForm(request.POST, request.FILES, instance=contact)
 
         # This is the context with all the contacts data will be passed to the template.
         context = {

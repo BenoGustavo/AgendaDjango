@@ -20,6 +20,13 @@
                         {{ field }}
                         {{ field.errors }}
                     </div>
+
+                    {% if field.name == "picture" and field.value.url %}
+                        <div class="form__group">
+                            <img src="{{ field.value.url }}" alt="image">
+                        </div>
+                    {% endif %}
+
                 {% endfor %}
             </div>
             
