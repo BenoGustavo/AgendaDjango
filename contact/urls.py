@@ -30,4 +30,6 @@ urlpatterns = [
     path("contact/<int:contact_id>/delete/", views.delete, name="delete"),
     # CRU of the user
     path("user/create/", views.register, name="create_user"),
+    path("user/login/", views.login_user_view, name="login_user"),
+    path("user/logout/", views.logout_user_view, name="logout_user"),
 ]
