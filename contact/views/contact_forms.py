@@ -15,6 +15,7 @@ def create(request):
         context = {
             "form": form,
             "form_action": form_action,
+            "what_the_page_does":"Create",
         }
 
         if form.is_valid():
@@ -33,6 +34,7 @@ def create(request):
     context = {
         "form": ContactForm(),
         "form_action": form_action,
+        "what_the_page_does":"Create",
     }
 
     return render(
@@ -54,6 +56,7 @@ def update(request, contact_id: int):
         context = {
             "form": form,
             "form_action": form_action,
+            "what_the_page_does":"Update",
         }
 
         if form.is_valid():
@@ -72,6 +75,7 @@ def update(request, contact_id: int):
     context = {
         "form": ContactForm(instance=contact),
         "form_action": form_action,
+        "what_the_page_does":"Update",
     }
 
     return render(
