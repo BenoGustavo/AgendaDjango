@@ -313,3 +313,37 @@ svg {
 .button__delete {
     background: tomato;
 }
+
+.message {
+    max-width: 600px;
+    margin: var(--spacing) auto;
+    margin-top: calc(--spacing) * 2;
+    padding: var(--spacing);
+    text-align: center;
+    border-radius: var(--default-border-radius);
+    font-size: var(--smaller-font-size);
+}
+
+.message.success {
+    background: rgba(0,255,0,0.3);
+    border: 1px solid rgba(0, 255, 0, 90%);
+}
+
+.message.error{
+    background: rgba(255,0,0,0.3);
+    border: 1px solid rgba(255, 0, 0, 90%);
+}
+
+.message.warning{
+    background: rgba(255,255,0,0.3);
+    border: 1px solid rgba(255, 255, 0, 90%);
+}
+
+.message.info{
+    background: rgba(0,0,255,0.3);
+    border: 1px solid rgba(0, 0, 255, 90%);
+}
+
+.center{
+    margin-top: 3rem;
+}
