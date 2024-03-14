@@ -7,18 +7,34 @@
 
     <nav class="navbar">
         <ul class="navbar__list">
-            <li class="navbar__item">
-                <a href={% url "contact:create" %} class="navbar__link">
-                    Create
-                </a>
-            </li>
-
-            <li class="navbar__item">
-                <a href="" class="navbar__link">
-                    placeholderlink2
-                </a>
-            </li>
-
+            {% if user.is_authenticated %}
+                <li class="navbar__item">
+                    <a href={% url "contact:create" %} class="navbar__link">
+                        Create contact
+                    </a>
+                </li>
+                <li class="navbar__item">
+                    <a href={% url "contact:update_user" %} class="navbar__link">
+                        Profile
+                    </a>
+                </li>
+                <li class="navbar__item">
+                    <a href={% url "contact:logout_user" %} class="navbar__link">
+                        Logout
+                    </a>
+                </li>
+            {% else %}
+                <li class="navbar__item">
+                    <a href={% url "contact:login_user" %} class="navbar__link">
+                        Login
+                    </a>
+                </li>
+                <li class="navbar__item">
+                    <a href={% url "contact:create_user" %} class="navbar__link">
+                        Register
+                    </a>
+                </li>
+            {% endif %}
         </ul>
     </nav>
 

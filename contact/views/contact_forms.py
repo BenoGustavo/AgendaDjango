@@ -2,8 +2,10 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
 from contact.forms import ContactForm
 from contact.models import Contact
+from django.contrib.auth.decorators import login_required
 
 
+@login_required(login_url="contact:login_user")
 def create(request):
     form_action = reverse("contact:create")
 
@@ -15,12 +17,13 @@ def create(request):
         context = {
             "form": form,
             "form_action": form_action,
-            "what_the_page_does":"Create",
+            "what_the_page_does": "Create",
         }
 
         if form.is_valid():
             print("valid form")
             contact = form.save(commit=False)
+            contact.owner = request.user
             contact.save()
             return redirect("contact:update", contact_id=contact.id)
 
@@ -34,7 +37,7 @@ def create(request):
     context = {
         "form": ContactForm(),
         "form_action": form_action,
-        "what_the_page_does":"Create",
+        "what_the_page_does": "Create",
     }
 
     return render(
@@ -44,8 +47,9 @@ def create(request):
     )
 
 
+@login_required(login_url="contact:login_user")
 def update(request, contact_id: int):
-    contact = get_object_or_404(Contact, pk=contact_id, show=True)
+    contact = get_object_or_404(Contact, pk=contact_id, show=True, owner=request.user)
     form_action = reverse("contact:update", args=((contact_id,)))
 
     # This will be the view for the contact creation form, if the user is only entering the page it won't trigger.
@@ -56,7 +60,7 @@ def update(request, contact_id: int):
         context = {
             "form": form,
             "form_action": form_action,
-            "what_the_page_does":"Update",
+            "what_the_page_does": "Update",
         }
 
         if form.is_valid():
@@ -75,7 +79,7 @@ def update(request, contact_id: int):
     context = {
         "form": ContactForm(instance=contact),
         "form_action": form_action,
-        "what_the_page_does":"Update",
+        "what_the_page_does": "Update",
     }
 
     return render(
@@ -85,8 +89,9 @@ def update(request, contact_id: int):
     )
 
 
+@login_required(login_url="contact:login_user")
 def delete(request, contact_id: int):
-    contact = get_object_or_404(Contact, pk=contact_id, show=True)
+    contact = get_object_or_404(Contact, pk=contact_id, show=True, owner=request.user)
 
     if request.method == "POST":
         contact.delete()
