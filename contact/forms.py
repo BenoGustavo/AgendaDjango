@@ -12,6 +12,7 @@ class ContactForm(forms.ModelForm):
         widget=forms.FileInput(
             attrs={
                 "accept": "image/*",
+                "required": False,
             }
         )
     )
@@ -88,6 +89,7 @@ class RegisterForm(UserCreationForm):
         return email
 
 
+# User update form
 class RegisterUpdateForm(forms.ModelForm):
     first_name = forms.CharField(
         required=True,
@@ -176,3 +178,24 @@ class RegisterUpdateForm(forms.ModelForm):
                 self.add_error("password1", ValidationError(e), code="invalid_password")
 
         return password1
+
+
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = models.Category
+        fields = (
+            "name",
+            "description",
+        )
+
+    def clean_name(self):
+        name = self.cleaned_data.get("name")
+        owner = self.instance.owner
+
+        if models.Category.objects.filter(name=name, owner=owner).exists():
+            self.add_error(
+                "name",
+                ValidationError(
+                    "This category already exists, try another one", code="invalid_name"
+                ),
+            )
