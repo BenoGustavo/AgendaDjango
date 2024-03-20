@@ -9,6 +9,11 @@
         <ul class="navbar__list">
             {% if user.is_authenticated %}
                 <li class="navbar__item">
+                    <a href={% url "contact:create_category" %} class="navbar__link">
+                        Create category
+                    </a>
+                </li>
+                <li class="navbar__item">
                     <a href={% url "contact:create" %} class="navbar__link">
                         Create contact
                     </a>
@@ -38,17 +43,22 @@
         </ul>
     </nav>
 
-    <div class="search">
-        <form action="{% url "contact:search" %}" method="get">
-            <input 
-                type="search" 
-                class="search__input" 
-                placeholder="Search"
-                id="search"
-                name="q"
-                {% comment %} Continue with the searched text on the search bar {% endcomment %}
-                value="{{ request.GET.q.strip }}"
-            >
-        </form>
-    </div>
+    {% comment %} 
+    DEUS ME PERDOE 
+    {% endcomment %}
+    {% if request.resolver_match.view_name != "contact:index_category" and request.resolver_match.view_name != "contact:single_category" and request.resolver_match.view_name != "contact:create_category" and request.resolver_match.view_name != "contact:update_category" and request.resolver_match.view_name != "contact:delete_category"%}
+        <div class="search">
+            <form action="{% url "contact:search" %}" method="get">
+                <input 
+                    type="search"
+                    class="search__input" 
+                    placeholder="Search"
+                    id="search"
+                    name="q"
+                    {% comment %} Continue with the searched text on the search bar {% endcomment %}
+                    value="{{ request.GET.q.strip }}"
+                >
+            </form>
+        </div>
+    {% endif %}
 </header>
