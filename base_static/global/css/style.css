@@ -314,6 +314,24 @@ svg {
     background: tomato;
 }
 
+.round__button {
+    border-radius: 100%;
+    transform: scale(0.9);
+    height: 100%;
+    width: auto;
+    text-align: center;
+    padding: 1rem 1.2rem 1rem 1.2rem;
+}
+
+.category__field {
+    display: inline-flex;
+}
+
+.category__field select {
+    width: 100%;
+    margin-right: var(--spacing);
+}
+
 .message {
     max-width: 600px;
     margin: var(--spacing) auto;
@@ -325,25 +343,25 @@ svg {
 }
 
 .message.success {
-    background: rgba(0,255,0,0.3);
+    background: rgba(0, 255, 0, 0.3);
     border: 1px solid rgba(0, 255, 0, 90%);
 }
 
-.message.error{
-    background: rgba(255,0,0,0.3);
+.message.error {
+    background: rgba(255, 0, 0, 0.3);
     border: 1px solid rgba(255, 0, 0, 90%);
 }
 
-.message.warning{
-    background: rgba(255,255,0,0.3);
+.message.warning {
+    background: rgba(255, 255, 0, 0.3);
     border: 1px solid rgba(255, 255, 0, 90%);
 }
 
-.message.info{
-    background: rgba(0,0,255,0.3);
+.message.info {
+    background: rgba(0, 0, 255, 0.3);
     border: 1px solid rgba(0, 0, 255, 90%);
 }
 
-.center{
+.center {
     margin-top: 3rem;
 }
