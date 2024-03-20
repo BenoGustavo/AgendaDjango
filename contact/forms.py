@@ -8,6 +8,13 @@ from . import models
 
 # New user form
 class ContactForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop("user", None)
+        super().__init__(*args, **kwargs)
+
+        # THIS FILTER THE CATEGORY FIELD TO SHOW ONLY THE CATEGORIES THAT BELONGS TO THE LOGGED USER
+        self.fields["category"].queryset = models.Category.objects.filter(owner=user)
+
     picture = forms.ImageField(
         widget=forms.FileInput(
             attrs={
