@@ -1,0 +1,23 @@
+{% extends "global/base.html" %}
+
+{% block content %}
+    <div class="single__contact">
+        <h1 class="single__contact__name">
+            {{ category.name }}
+        </h1>
+
+        <p><b>ID:</b> {{ category.id }}</p>
+        <p><b>Description:</b> {{ category.description }}</p>
+        <p><b>Owner:</b> {{ category.owner.first_name }} {{ category.owner.last_name }}</p>
+        
+        {% if category.owner == user and user.is_authenticated %}
+            <div class="contact__links">
+                <a href={% url "contact:update_category" category.id %} class="button button__link">Update</a>
+                <form action="{% url "contact:delete_category" category.id %}" method="POST">
+                    {% csrf_token %}
+                    <button class="button buttton__link button__delete">Delete</button>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+{% endblock content %}

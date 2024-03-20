@@ -1,0 +1,40 @@
+{% extends "global/base.html" %}
+
+{% block content %}
+{% if categories %}
+    <div class="table__dont__overflow">
+        <table class="contacts__table">
+            <caption class="table__caption">
+                Categories
+            </caption>
+
+            <thead>
+                <tr class="table__row table__row__header">
+                    {% comment %} This is the main table headers {% endcomment %}
+                    {% for header in table_headers %}
+                    <th class='table__header' >{{header}}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+                
+                <tbody>
+                {% for category in categories %}
+                    <tr class="table__row">
+                        <td class="table__cel">
+                            <a href="{% url "contact:single_category" category.id %}" class="table__link">{{ category.id }}</a>
+                        </td>
+                        <td class="table__cel">{{ category.name }}</td>
+                        <td class="table__cel">{{ category.owner.first_name }}</td>
+                    {% endfor %}
+                </tbody>
+        </table>
+    </div>
+
+{% else %}
+    <div class="single__contact">
+        <h1 class="single__contact__name">
+            The category {{ request.GET.q.strip }} was not found.
+        </h1>
+    </div>
+{% endif %}
+{% endblock content %}
