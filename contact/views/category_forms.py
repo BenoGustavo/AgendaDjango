@@ -30,7 +30,7 @@ def create_category(request):
             category.show = True
             category.save()
 
-        return redirect("contact:index")
+            return redirect("contact:index")
 
     return render(
         request,

@@ -199,3 +199,4 @@ class CategoryForm(forms.ModelForm):
                     "This category already exists, try another one", code="invalid_name"
                 ),
             )
+        return name
