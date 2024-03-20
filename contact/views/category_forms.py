@@ -39,29 +39,50 @@ def create_category(request):
     )
 
 
-# @login_required(login_url="contact:login_user")
-# def update_category(request, category_id: int):
-#     category = get_object_or_404(
-#         Category, pk=category_id, show=True, owner=request.user
-#     )
-#     form_action = reverse("contact:update_category", args=((category_id,)))
+@login_required(login_url="contact:login_user")
+def update_category(request, category_id: int):
+    category = get_object_or_404(
+        Category, pk=category_id, show=True, owner=request.user
+    )
+    form_action = reverse("contact:update_category", args=((category_id,)))
 
-#     context = {
-#         "page__tittle": "Category - Update",
-#     }
+    if request.method == "POST":
+        form = CategoryForm(request.POST, instance=category)
 
-#     if request.method == "POST":
-#         form = CategoryForm(request.POST, instance=category)
+        context = {
+            "form": form,
+            "form_action": form_action,
+            "page__tittle": "Category - Update",
+            "what_the_page_does": "Update",
+        }
 
-#         context = {
-#             "form": form,
-#             "form_action": form_action,
-#             "page__tittle": "Category - Update",
-#         }
+        if form.is_valid():
+            category = form.save(commit=False)
+            category.save()
+            return redirect("contact:update_category", category_id=category.id)
 
-#         if form.is_valid():
-#             category = form.save(commit=False)
-#             category.save()
-#             return redirect("contact:update_category", category_id=category.id)
+        return render(
+            request,
+            "contact/create.html",
+            context,
+        )
 
-#     return render(request, "contact/register.html", context)
+    context = {
+        "form": CategoryForm(instance=category),
+        "form_action": form_action,
+        "what_the_page_does": "Update",
+        "page__tittle": "Category - Update",
+    }
+
+    return render(request, "contact/register.html", context)
+
+
+@login_required(login_url="contact:login_user")
+def delete_category(request, category_id: int):
+    category = get_object_or_404(
+        Category, pk=category_id, show=True, owner=request.user
+    )
+    category.show = False
+    category.save()
+
+    return redirect("contact:index_category")

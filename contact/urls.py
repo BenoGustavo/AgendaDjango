@@ -33,11 +33,19 @@ urlpatterns = [
     path("user/login/", views.login_user_view, name="login_user"),
     path("user/logout/", views.logout_user_view, name="logout_user"),
     path("user/update/", views.update_user_view, name="update_user"),
+    # Category views
+    path("category/index/", views.index_category, name="index_category"),
+    path("category/<int:category_id>/", views.single_category, name="single_category"),
     # CRU of the categorys
     path("category/create/", views.create_category, name="create_category"),
-    # path(
-    #     "category/<int:category_id>/update/",
-    #     views.update_category,
-    #     name="update_category",
-    # ),
+    path(
+        "category/<int:category_id>/update/",
+        views.update_category,
+        name="update_category",
+    ),
+    path(
+        "contact/<int:contact_id>/delete/",
+        views.delete_category,
+        name="delete_category",
+    ),
 ]
