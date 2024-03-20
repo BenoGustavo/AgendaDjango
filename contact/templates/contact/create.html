@@ -16,9 +16,20 @@
             <div class="form__content">
                 {% for field in form %}
                     <div class="form__group">
-                        <label for="{{  field.id_for_label  }}">{{ field.label  }}</label>
-                        {{ field }}
-                        {{ field.errors }}
+
+                        {% if field.name == "category" %}
+                            <label for="{{  field.id_for_label  }}">{{ field.label  }}</label>
+                            <div class="category__field">
+                                {{ field }}
+                                <a class="button round__button" href={% url "contact:index_category" %} >👀</a>
+                            </div>
+                            {{ field.errors }}
+
+                        {% else %}
+                            <label for="{{  field.id_for_label  }}">{{ field.label  }}</label>
+                            {{ field }}
+                            {{ field.errors }}
+                        {% endif %}
                     </div>
 
                     {% if field.name == "picture" and field.value.url %}
