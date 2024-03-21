@@ -9,14 +9,16 @@ from . import models
 # New user form
 class ContactForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        # This is a custom argument that I'm passing to the form, 
-        # so I can filter the category field to show only the 
+        # This is a custom argument that I'm passing to the form,
+        # so I can filter the category field to show only the
         # categories that belongs to the logged user.
-        user = kwargs.pop('user')
+        user = kwargs.pop("user")
         super(ContactForm, self).__init__(*args, **kwargs)
 
         # THIS FILTER THE CATEGORY FIELD TO SHOW ONLY THE CATEGORIES THAT BELONGS TO THE LOGGED USER
-        self.fields["category"].queryset = models.Category.objects.filter(owner=user)
+        self.fields["category"].queryset = models.Category.objects.filter(
+            owner=user, show=True
+        )
 
     class Meta:
         model = models.Contact
@@ -112,7 +114,7 @@ class RegisterUpdateForm(forms.ModelForm):
         required=False,
     )
     password2 = forms.CharField(
-        label="Confirm passoword",
+        label="Confirm password",
         strip=False,
         widget=forms.PasswordInput(attrs={"autocomplete": "new-password"}),
         help_text="Use the same password as before.",
