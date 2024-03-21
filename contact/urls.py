@@ -44,7 +44,7 @@ urlpatterns = [
         name="update_category",
     ),
     path(
-        "contact/<int:contact_id>/delete/",
+        "category/<int:category_id>/delete/",
         views.delete_category,
         name="delete_category",
     ),
