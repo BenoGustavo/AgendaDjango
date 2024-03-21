@@ -3,6 +3,7 @@ from django.urls import reverse
 from contact.forms import CategoryForm
 from contact.models import Category
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 @login_required(login_url="contact:login_user")
@@ -31,6 +32,7 @@ def create_category(request):
             category.show = True
             category.save()
 
+            messages.success(request, "Category successfully updated")
             return redirect("contact:index")
 
     return render(
@@ -61,6 +63,7 @@ def update_category(request, category_id: int):
         if form.is_valid():
             category = form.save(commit=False)
             category.save()
+            messages.success(request, "Category successfully updated")
             return redirect("contact:update_category", category_id=category.id)
 
         return render(
@@ -87,5 +90,6 @@ def delete_category(request, category_id: int):
     )
     category.show = False
     category.save()
+    messages.success(request, "Category successfully deleted")
 
     return redirect("contact:index_category")

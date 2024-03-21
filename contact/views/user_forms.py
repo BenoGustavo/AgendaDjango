@@ -25,12 +25,15 @@ def register(request):
     return render(
         request,
         "contact/register.html",
-        {"form": form, "page__tittle": "Register user"},
+        {
+            "form": form,
+            "page__tittle": "Register user",
+            "website_tittle": "Register - ",
+        },
     )
 
 
 def login_user_view(request):
-
     form = AuthenticationForm(request)
 
     if request.method == "POST":
