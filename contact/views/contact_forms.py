@@ -11,14 +11,15 @@ def create(request):
 
     # This will be the view for the contact creation form, if the user is only entering the page it won't trigger.
     if request.method == "POST":
-        #I"m sending the user to check the categories that belongs to the him on the ContactForm model
-        form = ContactForm(request.POST, request.FILES,user=request.user)
+        # I"m sending the user to check the categories that belongs to the him on the ContactForm model
+        form = ContactForm(request.POST, request.FILES, user=request.user)
 
         # This is the context with all the contacts data will be passed to the template.
         context = {
             "form": form,
             "form_action": form_action,
             "what_the_page_does": "Create",
+            "website_tittle": "Create contact -",
         }
 
         if form.is_valid():
@@ -36,10 +37,11 @@ def create(request):
 
     # This is the context with all the contacts data will be passed to the template.
     context = {
-        #I"m sending the user to check the categories that belongs to the him on the ContactForm model
+        # I"m sending the user to check the categories that belongs to the him on the ContactForm model
         "form": ContactForm(user=request.user),
         "form_action": form_action,
         "what_the_page_does": "Create",
+        "website_tittle": "Create contact -",
     }
 
     return render(
@@ -56,14 +58,17 @@ def update(request, contact_id: int):
 
     # This will be the view for the contact creation form, if the user is only entering the page it won't trigger.
     if request.method == "POST":
-        #I"m sending the user to check the categories that belongs to the him on the ContactForm model
-        form = ContactForm(request.POST, request.FILES, instance=contact,user=request.user)
+        # I"m sending the user to check the categories that belongs to the him on the ContactForm model
+        form = ContactForm(
+            request.POST, request.FILES, instance=contact, user=request.user
+        )
 
         # This is the context with all the contacts data will be passed to the template.
         context = {
             "form": form,
             "form_action": form_action,
             "what_the_page_does": "Update",
+            "website_tittle": "Update contact -",
         }
 
         if form.is_valid():
@@ -80,10 +85,11 @@ def update(request, contact_id: int):
 
     # This is the context with all the contacts data will be passed to the template.
     context = {
-        #I"m sending the user to check the categories that belongs to the him on the ContactForm model
-        "form": ContactForm(instance=contact,user=request.user),
+        # I"m sending the user to check the categories that belongs to the him on the ContactForm model
+        "form": ContactForm(instance=contact, user=request.user),
         "form_action": form_action,
         "what_the_page_does": "Update",
+        "website_tittle": "Update contact -",
     }
 
     return render(
@@ -109,5 +115,6 @@ def delete(request, contact_id: int):
             "delete__button__text": "Are you sure you want to delete this contact?",
             "website_tittle": "Manage contact -",
             "form__method": "POST",
+            "website_tittle": "Delete contact -",
         },
     )

@@ -65,7 +65,7 @@ def update_user_view(request):
         return render(
             request,
             "contact/register.html",
-            {"form": form, "page__tittle": "Update user"},
+            {"form": form, "website_tittle": "Update user - "},
         )
 
     form.save()

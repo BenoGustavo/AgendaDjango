@@ -13,6 +13,7 @@ def create_category(request):
         "form": CategoryForm(),
         "form_action": form_action,
         "page__tittle": "Category - Create",
+        "website_tittle": "Create category -",
     }
 
     if request.method == "POST":
@@ -54,6 +55,7 @@ def update_category(request, category_id: int):
             "form_action": form_action,
             "page__tittle": "Category - Update",
             "what_the_page_does": "Update",
+            "website_tittle": "Update category -",
         }
 
         if form.is_valid():
@@ -72,6 +74,7 @@ def update_category(request, category_id: int):
         "form_action": form_action,
         "what_the_page_does": "Update",
         "page__tittle": "Category - Update",
+        "website_tittle": "Update category -",
     }
 
     return render(request, "contact/register.html", context)
